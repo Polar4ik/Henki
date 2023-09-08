@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://dep3y5t5kxxaw"]
+
+[ext_resource type="PackedScene" uid="uid://b23vncynumg4d" path="res://scenes/levels/start/start.tscn" id="1_6ca8j"]
+[ext_resource type="Script" path="res://scripts/camera/main_camera.gd" id="2_mmkgk"]
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="3_6n2ij"]
+[ext_resource type="Script" path="res://scripts/player/input_handler.gd" id="3_l60mg"]
+[ext_resource type="Script" path="res://scripts/components/inventory_component.gd" id="5_n5cmn"]
+[ext_resource type="Script" path="res://resource/inventory/inventory/inventory_resource.gd" id="6_njkef"]
+[ext_resource type="PackedScene" uid="uid://dokxthaucy7ov" path="res://ui/inventory/inventory_rect_windows.tscn" id="7_qgdbi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0cq65"]
+
+[sub_resource type="Resource" id="Resource_cxbrl"]
+script = ExtResource("6_njkef")
+items = Array[Resource("res://resource/inventory/item in inventory/item_inventory_resource.gd")]([])
+size = 9
+
+[node name="World" type="Node3D"]
+
+[node name="Start" parent="." instance=ExtResource("1_6ca8j")]
+
+[node name="MainCamera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 11, 18)
+script = ExtResource("2_mmkgk")
+target = NodePath("../Player")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("3_6n2ij")
+
+[node name="CollisionBox" type="CollisionShape3D" parent="Player"]
+shape = SubResource("BoxShape3D_0cq65")
+
+[node name="InputHandler" type="Node" parent="Player"]
+script = ExtResource("3_l60mg")
+
+[node name="InventoryComponent" type="Node" parent="Player"]
+script = ExtResource("5_n5cmn")
+inventory = SubResource("Resource_cxbrl")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InventoryRectWindow" parent="GUI/VBoxContainer/HBoxContainer" instance=ExtResource("7_qgdbi")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4

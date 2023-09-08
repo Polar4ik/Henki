@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b23vncynumg4d"]
+
+[sub_resource type="Environment" id="Environment_rbtkl"]
+background_mode = 1
+background_color = Color(0.00784314, 0.00784314, 0.0156863, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kx471"]
+albedo_color = Color(0.466667, 0, 0.701961, 1)
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.466667, 0, 0.7, 1)
+
+[node name="Start" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rbtkl")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = SubResource("StandardMaterial3D_kx471")
+size = Vector3(20, 2, 20)
