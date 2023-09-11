@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpape004dlm8x"]
+
+[ext_resource type="Texture2D" uid="uid://blft6qj2fjbqd" path="res://assets/sprites/ui/interface/slot.png" id="1_no56h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ku2pq"]
+
+[node name="SlotContainer" type="PanelContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(85, 85)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ku2pq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_no56h")

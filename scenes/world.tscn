@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dep3y5t5kxxaw"]
+[gd_scene load_steps=12 format=3 uid="uid://dep3y5t5kxxaw"]
 
 [ext_resource type="PackedScene" uid="uid://b23vncynumg4d" path="res://scenes/levels/start/start.tscn" id="1_6ca8j"]
 [ext_resource type="Script" path="res://scripts/camera/main_camera.gd" id="2_mmkgk"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" path="res://scripts/player/input_handler.gd" id="3_l60mg"]
 [ext_resource type="Script" path="res://scripts/components/inventory_component.gd" id="5_n5cmn"]
 [ext_resource type="Script" path="res://resource/inventory/inventory/inventory_resource.gd" id="6_njkef"]
-[ext_resource type="PackedScene" uid="uid://dokxthaucy7ov" path="res://ui/inventory/inventory_rect_windows.tscn" id="7_qgdbi"]
+[ext_resource type="Texture2D" uid="uid://10xtkt8413fx" path="res://assets/sprites/ui/interface/interface.png" id="7_5joei"]
+[ext_resource type="FontFile" uid="uid://c608ckht66vex" path="res://assets/fonts/PixelRPG.ttf" id="8_lc6xq"]
+[ext_resource type="PackedScene" uid="uid://bpape004dlm8x" path="res://ui/inventory/slot_container.tscn" id="9_crom5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0cq65"]
 
@@ -38,20 +40,92 @@ script = ExtResource("3_l60mg")
 script = ExtResource("5_n5cmn")
 inventory = SubResource("Resource_cxbrl")
 
-[node name="GUI" type="CanvasLayer" parent="."]
+[node name="GUI Layer" type="CanvasLayer" parent="."]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
+[node name="Control" type="Control" parent="GUI Layer"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
+[node name="MarginContainer" type="MarginContainer" parent="GUI Layer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
-[node name="InventoryRectWindow" parent="GUI/VBoxContainer/HBoxContainer" instance=ExtResource("7_qgdbi")]
+[node name="InventoryContainer" type="MarginContainer" parent="GUI Layer/Control/MarginContainer"]
+custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GUI Layer/Control/MarginContainer/InventoryContainer"]
+layout_mode = 2
+texture = ExtResource("7_5joei")
+region_rect = Rect2(0, 0, 480, 480)
+patch_margin_left = 100
+patch_margin_top = 100
+patch_margin_right = 100
+patch_margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InventoryLabel" type="Label" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("8_lc6xq")
+theme_override_font_sizes/font_size = 24
+text = "INVENTORY"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SlotsGridContainer" type="GridContainer" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="SlotContainer" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect/VBoxContainer/SlotsGridContainer" instance=ExtResource("9_crom5")]
+layout_mode = 2
+
+[node name="SlotContainer2" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect/VBoxContainer/SlotsGridContainer" instance=ExtResource("9_crom5")]
+layout_mode = 2
+
+[node name="SlotContainer3" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect/VBoxContainer/SlotsGridContainer" instance=ExtResource("9_crom5")]
+layout_mode = 2
+
+[node name="SlotContainer4" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect/VBoxContainer/SlotsGridContainer" instance=ExtResource("9_crom5")]
+layout_mode = 2
+
+[node name="SlotContainer5" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect/VBoxContainer/SlotsGridContainer" instance=ExtResource("9_crom5")]
+layout_mode = 2
+
+[node name="SlotContainer6" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect/VBoxContainer/SlotsGridContainer" instance=ExtResource("9_crom5")]
+layout_mode = 2
+
+[node name="SlotContainer7" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect/VBoxContainer/SlotsGridContainer" instance=ExtResource("9_crom5")]
+layout_mode = 2
+
+[node name="SlotContainer8" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect/VBoxContainer/SlotsGridContainer" instance=ExtResource("9_crom5")]
+layout_mode = 2
+
+[node name="SlotContainer9" parent="GUI Layer/Control/MarginContainer/InventoryContainer/NinePatchRect/VBoxContainer/SlotsGridContainer" instance=ExtResource("9_crom5")]
+layout_mode = 2
